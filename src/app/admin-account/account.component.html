@@ -1,0 +1,671 @@
+<div class="container" style="width:1400px;height:1100px">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bhoechie-tab-container">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 bhoechie-tab-menu">
+              <div class="list-group main_tab" id="sidenav01">
+                  <a href="#" class="list-group-item active text-center" id="balance_main">
+                    <h4 class="glyphicon glyphicon-credit-card"></h4><br/>Balance
+                  </a>
+                  <a href="#" class="list-group-item text-center" id="deposit_main">
+                    <h4 class="glyphicon glyphicon-wrench"></h4><br/>Trader Account Settings
+                  </a>
+              </div>
+            </div>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 bhoechie-tab" style="margin-left:-29px">
+                <!-- Balance section -->
+                <div class="bhoechie-tab-content active">
+                    <div class="col-md-12" style="background-color:white;margin-bottom:10px">
+                        <div class="well well-sm" style="margin-top:3px;border:1px solid #337ab7;height:875px" id="well_height">
+                          <br>
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <span style="white-space: nowrap">
+                                <div class="col-md-3">
+                                  <label style="margin-left:-14px">Select Account to Display Balance</label>
+                                </div>
+                                <div class="col-md-1">
+                                  <span><b>:</b></span>
+                                </div>
+                                <div class="col-md-4">
+                                  <select class="form-control" (change)="select_trader($event)" id="trader_change" style="margin-left:-54px;margin-top:-7px;width:70%">
+                                    <option value="" disabled selected>Select Account</option>
+                                    <option *ngFor="let trader of traders" [selected]="trader == 'Trader1'" value= {{trader}}>{{trader}}</option>
+                                  </select>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="input-group stylish-input-group" style="margin-left:60px;margin-top:-8px;margin-right:-15px">
+                                    <input type="text" class="form-control" value="" placeholder="Search" style="border:1px solid #337ab7;border-right:none;width:105%;">
+                                    <span class="input-group-addon">
+                                      <button type="submit">
+                                          <span class="glyphicon glyphicon-search"></span>
+                                      </button>
+                                    </span>
+                                  </div>
+                                </div>
+                              </span>
+                            </div>
+                          </div><br><br>
+                          <div class="col-md-12">
+                            <table class="table table-bordered balance_table">
+                              <thead>
+                                <tr>
+                                  <th><b>Asset</b></th>
+                                  <th><b>Available</b></th>
+                                  <th><b>Committed</b></th>
+                                  <th><b>Total</b></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>Bitcoin (BTC)</td>
+                                  <td>1.2</td>
+                                  <td>0.0</td>
+                                  <td>1.2</td>
+                                </tr>
+                                <tr>
+                                  <td>Litecoin (LTC)</td>
+                                  <td>4</td>
+                                  <td>2</td>
+                                  <td>6</td>
+                                </tr>
+                                <tr>
+                                  <td>Ethereum (ETH)</td>
+                                  <td>0</td>
+                                  <td>10</td>
+                                  <td>10</td>
+                                </tr>
+                                <tr>
+                                  <td>Zcash (ZEC)</td>
+                                  <td>210</td>
+                                  <td>10</td>
+                                  <td>220</td>
+                                </tr>
+                                <tr>
+                                  <td>Dash (DASH)</td>
+                                  <td>12</td>
+                                  <td>4</td>
+                                  <td>16</td>
+                                </tr>
+                                <tr>
+                                  <td>Ripple (XRP)</td>
+                                  <td>15200</td>
+                                  <td>0</td>
+                                  <td>15200</td>
+                                </tr>
+                                <tr>
+                                  <td>Monero (XMR)</td>
+                                  <td>450</td>
+                                  <td>50</td>
+                                  <td>500</td>
+                                </tr>
+                                <tr>
+                                  <td>BitcoinCash (BCH)</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                </tr>
+                                <tr>
+                                  <td>Cardano (ADA)</td>
+                                  <td>8</td>
+                                  <td>4</td>
+                                  <td>12</td>
+                                </tr>
+                                <tr>
+                                  <td>Maker (MKR)</td>
+                                  <td>2.5</td>
+                                  <td>4</td>
+                                  <td>6.5</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="col-md-12">
+                            <p style="color:green">** Available - Balance Available for Trading / Withdrawal</p>
+                            <p style="color:green">** Committed - Balance on hold due to Active Order / Pending Transaction</p>
+                          </div>
+                          <div class="col-md-12">
+                            <label style="font-size:16px;color:#337ab7">Exchange wise balance - <span id="exchange_account"></span> :</label>
+                            <table class="table table-bordered exchange_balance_table" id="table1">
+                              <thead>
+                                <tr>
+                                  <th>Asset</th>
+                                  <th>Binance</th>
+                                  <th>Qryptos</th>
+                                  <th>Gdax</th>
+                                  <th>Huobi</th>
+                                  <th>Kraken</th>
+                                  <th>Okex</th>
+                                  <th>Hitbtc</th>
+                                  <th>Bitstamp</th>
+                                  <th>Exmo</th>
+                                  <th>Yobit</th>
+                                  <th>Gateio</th>
+                                  <th>Coinex</th>
+                                  <th>Poloniex</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>Bitcoin (BTC)</td>
+                                  <td>2</td>
+                                  <td>4</td>
+                                  <td>5</td>
+                                  <td>0.5</td>
+                                  <td>3.2</td>
+                                  <td>5.5</td>
+                                  <td>15</td>
+                                  <td>11.30</td>
+                                  <td>12</td>
+                                  <td>6</td>
+                                  <td>20</td>
+                                  <td>3.4</td>
+                                  <td>8.8</td>
+                                </tr>
+                                <tr>
+                                  <td>Litecoin (LTC)</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>5</td>
+                                  <td>1.5</td>
+                                  <td>0.2</td>
+                                  <td>0.5</td>
+                                  <td>1.5</td>
+                                  <td>10.30</td>
+                                  <td>12.4</td>
+                                  <td>4.6</td>
+                                  <td>20</td>
+                                  <td>3.0</td>
+                                  <td>8.1</td>
+                                </tr>
+                                <tr>
+                                  <td>Ethereum (ETH)</td>
+                                  <td>1</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>1.5</td>
+                                  <td>0.2</td>
+                                  <td>5.0</td>
+                                  <td>9</td>
+                                  <td>0.3</td>
+                                  <td>12.8</td>
+                                  <td>6.5</td>
+                                  <td>2</td>
+                                  <td>0.4</td>
+                                  <td>8.0</td>
+                                </tr>
+                                <tr>
+                                  <td>Zcash (ZEC)</td>
+                                  <td>10</td>
+                                  <td>0</td>
+                                  <td>3</td>
+                                  <td>5.6</td>
+                                  <td>3.2</td>
+                                  <td>5.7</td>
+                                  <td>0.15</td>
+                                  <td>12.30</td>
+                                  <td>11</td>
+                                  <td>6.5</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                </tr>
+                                <tr>
+                                  <td>Dash (DASH)</td>
+                                  <td>1.2</td>
+                                  <td>0</td>
+                                  <td>0.5</td>
+                                  <td>1.5</td>
+                                  <td>1.2</td>
+                                  <td>0.5</td>
+                                  <td>1.1</td>
+                                  <td>0.0</td>
+                                  <td>0</td>
+                                  <td>6.4</td>
+                                  <td>2.9</td>
+                                  <td>30</td>
+                                  <td>0.8</td>
+                                </tr>
+                                <tr>
+                                  <td>Ripple (XRP)</td>
+                                  <td>0</td>
+                                  <td>1</td>
+                                  <td>0</td>
+                                  <td>1.5</td>
+                                  <td>0.2</td>
+                                  <td>0.5</td>
+                                  <td>1.5</td>
+                                  <td>1.3</td>
+                                  <td>11</td>
+                                  <td>6.5</td>
+                                  <td>0.2</td>
+                                  <td>0.4</td>
+                                  <td>1.8</td>
+                                </tr>
+                                <tr>
+                                  <td>Monero (XMR)</td>
+                                  <td>0.9</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>0.5</td>
+                                  <td>1.5</td>
+                                  <td>10</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                </tr>
+                                <tr>
+                                  <td>BitcoinCash (BCH)</td>
+                                  <td>1.9</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>3.4</td>
+                                  <td>0.5</td>
+                                  <td>1.0</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                </tr>
+                                <tr>
+                                  <td>Cardano (ADA)</td>
+                                  <td>0.9</td>
+                                  <td>10</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>1.4</td>
+                                  <td>4.5</td>
+                                  <td>0.8</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>20</td>
+                                  <td>0</td>
+                                  <td>0.5</td>
+                                </tr>
+                                <tr>
+                                  <td>Maker (MKR)</td>
+                                  <td>0.4</td>
+                                  <td>0</td>
+                                  <td>2</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>2.4</td>
+                                  <td>1.5</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>10</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <br>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="panel panel-primary" style="border:2px solid #337ab7;margin-right:-4px">
+                              <div class="panel-heading" style="text-align:center"><b>Transfer Funds Between Accounts</b></div>
+                                <div class="panel-body">
+                                  <div class="form-group">
+                                    <span style="white-space: nowrap">
+                                      <div class="col-md-12">
+                                        <div class="col-md-2">
+                                            <label style="margin-top:7px;margin-left:100px">From</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                          <select class="form-control" id="from_addr" style="width:70%">
+                                            <option value="" disabled selected>Select Account</option>
+                                            <option *ngFor="let trader of traders"  [selected]="trader == 'Trader1'" value="{{trader}}">{{trader}}</option>
+                                          </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label style="margin-top:7px;margin-left:100px">To</label>
+                                        </div>
+                                        <div class="col-md-4" id="to_acc">
+                                            <input type="text" class="form-control" placeholder="To account"  value="Main" style="width:70%">
+                                        </div>
+                                      </div>
+                                    </span>
+                                  </div><br><br>
+                                  <div class="form-group">
+                                    <span style="white-space: nowrap">
+                                      <div class="col-md-12">
+                                        <div class="col-md-2">
+                                            <label style="margin-top:7px;margin-left:100px">Asset</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                          <select class="form-control" (change)="select_trans_asset($event)" id="asset_selection" style="width:70%">
+                                            <option value="" disabled selected>Select Asset</option>
+                                            <option *ngFor="let asset of assets" value="{{asset}}">{{asset}}</option>
+                                          </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label style="margin-top:7px;margin-left:100px">Quantity</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" placeholder="Enter units" style="width:70%">
+                                        </div>
+                                      </div>
+                                    </span>
+                                  </div>
+                                  <br><br>
+                                  <p style="margin-left:130px;color:green;display:none" id="balance_display">** Available <span id="available_bal"></span> Balance : 15200.0</p>
+                                  <div class="col-sm-12">
+                                    <div class="col-sm-6">
+                                      <button class="btn btn-default submit" (click)="confirm_transfer()" style="border:2px solid #337ab7;width:30%;margin-left:345px;background-color:#337ab7;color:white"><b>Confirm Transfer</b></button>
+                                    </div>
+                                    <div class="col-sm-6">
+                                      <button class="btn btn-default reset" (click)="transfer_reset()" style="border:2px solid #337ab7;width:30%;background-color:#337ab7;color:white"><b>Reset</b></button>
+                                    </div>
+                                  </div>
+                                  <br><br><br>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bhoechie-tab-content">
+                  <div class="col-md-12" style="background-color:white;margin-bottom:10px">
+                  <div class="well well-sm" style="margin-top:3px;border:1px solid #337ab7;height:740px">
+                  <br>
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                          <div class="col-md-8">
+                              <legend style="width:65%;margin-left:-94px">Tradeable Market Centers (Trader1) :</legend>
+                          </div>
+                          <div class="col-md-2" style="cursor:pointer">
+                            <button class="btn btn-default" (click)="enable_markets()" style="border:2px solid #337ab7;width:110%;margin-left:7px;background-color:#337ab7;color:white;margin-top:-5px"  id="enable_markets"><b>Enable All Markets</b></button>
+                          </div>
+                          <div class="col-md-2" style="cursor:pointer">
+                            <button class="btn btn-default" (click)="disable_markets()" style="border:2px solid #337ab7;width:110%;background-color:#337ab7;color:white;margin-left:-1px;margin-top:-5px" id="disable_markets"><b>Disable All Markets</b></button>
+                          </div>
+                        </div>
+                        <div class="table-responsive" style="overflow-x:inherit">
+                          <table class="table table-bordered trade_account_setting" id="table2">
+                            <thead>
+                              <tr>
+                                <th>Crypto</th>
+                                <th>Binance</th>
+                                <th>Qryptos</th>
+                                <th>Gdax</th>
+                                <th>Huobi</th>
+                                <th>Kraken</th>
+                                <th>Okex</th>
+                                <th>Hitbtc</th>
+                                <th>Bitstamp</th>
+                                <th>Exmo</th>
+                                <th>Yobit</th>
+                                <th>Gateio</th>
+                                <th>Coinex</th>
+                                <th>Poloniex</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Bitcoin (BTC)</td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                              </tr>
+                              <tr>
+                                <td>Litecoin (LTC)</td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                              </tr>
+                              <tr>
+                                <td>Ethereum (ETH)</td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                              </tr>
+                              <tr>
+                                <td>Zcash (ZEC)</td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                              </tr>
+                              <tr>
+                                <td>Dash (DASH)</td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                              </tr>
+                              <tr>
+                                <td>Ripple (XRP)</td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                              </tr>
+                              <tr>
+                                <td>Monero (XMR)</td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                              </tr>
+                              <tr>
+                                <td>BitcoinCash (BCH)</td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                              </tr>
+                              <tr>
+                                <td>Cardano (ADA)</td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                              </tr>
+                              <tr>
+                                <td>Maker (MKR)</td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                                <td><label class="container1"><input type="checkbox"><span class="checkmark"></span></label></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div><br>
+                        <div class="col-md-12">
+                          <legend style="margin-left:-10px;width:27%">Market Access Checks (Trader1) :</legend>
+                        </div>
+                        <div class="col-md-12">
+                          <table class="table table-bordered market_access_checks">
+                            <thead>
+                              <tr>
+                                <th><b>Asset</b></th>
+                                <th><b>Max Order Quantity</b></th>
+                                <th><b>Max Dollar Value ($)</b></th>
+                                <th><b>Max Price Variation (%)</b></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Bitcoin (BTC)</td>
+                                <td>15</td>
+                                <td>100000</td>
+                                <td>10</td>
+                              </tr>
+                              <tr>
+                                <td>Litecoin (LTC)</td>
+                                <td>500</td>
+                                <td>100000</td>
+                                <td>15</td>
+                              </tr>
+                              <tr>
+                                <td>Ethereum (ETH)</td>
+                                <td>250</td>
+                                <td>100000</td>
+                                <td>5</td>
+                              </tr>
+                              <tr>
+                                <td>Zcash (ZEC)</td>
+                                <td>300</td>
+                                <td>100000</td>
+                                <td>20</td>
+                              </tr>
+                              <tr>
+                                <td>Dash (DASH)</td>
+                                <td>12</td>
+                                <td>100000</td>
+                                <td>8</td>
+                              </tr>
+                              <tr>
+                                <td>Ripple (XRP)</td>
+                                <td>25</td>
+                                <td>100000</td>
+                                <td>10</td>
+                              </tr>
+                              <tr>
+                                <td>Monero (XMR)</td>
+                                <td>50</td>
+                                <td>100000</td>
+                                <td>4</td>
+                              </tr>
+                              <tr>
+                                <td>BitcoinCash (BCH)</td>
+                                <td>10</td>
+                                <td>100000</td>
+                                <td>5</td>
+                              </tr>
+                              <tr>
+                                <td>Cardano (ADA)</td>
+                                <td>11</td>
+                                <td>100000</td>
+                                <td>10</td>
+                              </tr>
+                              <tr>
+                                <td>Maker (MKR)</td>
+                                <td>2</td>
+                                <td>100000</td>
+                                <td>5</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div><br><br>
+                        <div class="col-md-12 center-block" id="modify_setting">
+                          <button class="btn btn-default center-block" (click)="modify_settings()" style="border:2px solid #337ab7;background-color:#337ab7;color:white;"><b>Modify Settings</b></button>
+                          <br>
+                        </div>
+                        <div class="col-sm-12" style="display:none" id="modify_button">
+                          <div class="col-sm-6">
+                            <button class="btn btn-default" (click)="save_changes()" style="border:2px solid #337ab7;width:30%;margin-left:345px;background-color:#337ab7;color:white"><b>Save Changes</b></button>
+                          </div>
+                          <div class="col-sm-6">
+                            <button class="btn btn-default" (click)="modify_reset()" style="border:2px solid #337ab7;width:30%;background-color:#337ab7;color:white"><b>Reset</b></button>
+                          </div><br><br>
+                        </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+  </div>
+</div>
