@@ -1,0 +1,697 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-2">
+        <div class="row">
+          <div class="form-group">
+            <span style="white-space: nowrap">
+              <div class="col-md-4">
+                <label style="margin-left:-16px">Symbol</label>
+              </div>
+              <div class="col-md-8">
+                <div class="input-group stylish-input-group" style="margin-left:-15px;margin-right:-43px;width:107%">
+                  <input type="text" class="form-control" id="tags" value="" placeholder="Search" style="border-right:none;width:126%;margin-left:-34px">
+                  <span class="input-group-addon">
+                    <button type="submit">
+                      <span class="glyphicon glyphicon-search" style="border-radius:0px;"></span>
+                    </button>
+                  </span>
+                </div>
+                <span class="glyphicon glyphicon-info-sign" style="top:-24px;margin-left:173px;font-size:16px;cursor:pointer;color:black" data-toggle="modal" data-target="#assetModal"></span>
+              </div>
+              <div class="modal fade" id="assetModal" role="dialog">
+                <div class="modal-dialog" style="margin-left:18%;margin-top:7%;width:475px">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title" style="text-align:center"><b>Asset Modal</b></h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>Will route to best possible venue based on current market conditions</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </span>
+          </div><br><br>
+          <div class="form-group">
+            <span style="white-space: nowrap">
+              <div class="col-md-4">
+                <label style="margin-left:-16px">Market</label>
+              </div>
+              <div class="col-md-8">
+                <select class="form-control" (change)="market_change($event)" id="market_change" style="margin-left:-50px;width:127%">
+                  <option value="" disabled selected>Select Market</option>
+                  <option *ngFor="let market of markets" [selected]="market == 'UNIVERSAL'" value= {{market}}>{{market}}</option>
+                </select>
+                <span class="glyphicon glyphicon-info-sign" style="top:-24px;margin-left:172px;font-size:16px;cursor:pointer;color:black" data-toggle="modal" data-target="#marketModal"></span>
+              </div>
+              <div class="modal fade" id="marketModal" role="dialog">
+                <div class="modal-dialog" style="margin-left:18%;margin-top:3%;width:475px">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title" style="text-align:center"><b>Market Modal</b></h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>Will route to best possible venue based on current market conditions</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </span>
+          </div><br><br>
+          <div class="panel panel-primary" style="border:2px solid #337ab7;margin-right:-4px">
+            <div class="panel-heading" style="text-align:center"><b>Order Entry</b></div>
+              <div class="panel-body">
+                <ul class="nav nav-tabs nav-justified">
+                  <li class="active"><a data-toggle="tab" href="#buy" id="buy_option" (click)="buy_option()" style="color:green"><b>Buy</b></a></li>
+                  <li><a data-toggle="tab" href="#sell" id="sell_option" (click)="sell_option()" style="color:brown"><b>Sell</b></a></li>
+                </ul>
+                <div class="tab-content">
+                  <div id="buy" class="tab-pane fade in active">
+                    <div class="row">
+                  <br>
+                  <div class="form-group buy_color">
+                    <span style="white-space: nowrap">
+                      <div class="col-md-4">
+                        <label>Quantity</label>
+                      </div>
+                      <div class="col-md-8">
+                        <input type="number" class="form-control" id="buy_quantity" placeholder="Enter quantity">
+                      </div>
+                    </span>
+                  </div><br><br>
+                      <p id="balance_text" style="margin-left:15px;margin-top:-15px;color:green;font-size:11px;display:none"><b><i>** Available balance in <span id="exchange_balance"></span>:2</i></b> </p>
+                  <div class="form-group buy_color">
+                    <span style="white-space: nowrap">
+                      <div class="col-md-4">
+                        <label>OrderType</label>
+                      </div>
+                      <div class="col-md-8">
+                        <select class="form-control" (change)="Buy_test($event)" id="buy_orderType">
+                          <option value="" disabled selected>Select Type</option>
+                          <option *ngFor="let type of types" value="{{type}}">{{type}}</option>
+                        </select>
+                      </div>
+                    </span>
+                  </div><br><br>
+                  <div class="form-group buy_color">
+                    <span style="white-space: nowrap">
+                      <div class="col-md-4">
+                        <label>Price</label>
+                      </div>
+                      <div class="col-md-8">
+                        <input type="number" class="form-control" placeholder="Enter price" id="buy_price">
+                      </div>
+                    </span>
+                  </div><br><br>
+                  <div class="form-group buy_color">
+                    <span style="white-space: nowrap">
+                      <div class="col-md-4">
+                        <label>Destination</label>
+                      </div>
+                      <div class="col-md-8">
+                        <select class="form-control" (click)="Buy_destination($event)" id="buy_exchange">
+                          <option value="" disabled selected>Select Destination</option>
+                          <option *ngFor="let exchange of exchanges" [selected]="exchange == 'BEST'" value="{{exchange}}">{{exchange}}</option>
+                        </select>
+                        <span class="glyphicon glyphicon-info-sign" style="top:-25px;margin-left:172px;font-size:13px;cursor:pointer;color:black" data-toggle="modal" data-target="#BuyModal"></span>
+                      </div>
+                    </span>
+                  </div><br><br>
+                      <p style="font-size:11px;margin-left:15px;color:black" id="exchange_text"><b><i>** BEST - Will route to best possible venue based on current market conditions</i></b></p>
+                  <div class="modal fade" id="BuyModal" role="dialog">
+                    <div class="modal-dialog" style="margin-left:17%;margin-top:25%;width:475px">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title" style="text-align:center"><b>BEST</b></h4>
+                        </div>
+                        <div class="modal-body">
+                          <p>Will route to best possible venue based on current market conditions</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group buy_color">
+                    <span style="white-space: nowrap">
+                      <div class="col-md-4">
+                        <label>Expiry</label>
+                      </div>
+                      <div class="col-md-8">
+                        <select class="form-control" (click)="Buy_Type($event)">
+                          <option value="" disabled selected>Select Type</option>
+                          <option *ngFor="let type of expiry" value="{{type}}">{{type}}</option>
+                        </select>
+                      </div>
+                    </span>
+                  </div><br><br>
+                  <div class="form-group buy_color">
+                    <span style="white-space: nowrap">
+                      <div class="col-md-4">
+                        <label>Stop-Limit</label>
+                      </div>
+                      <div class="col-md-8">
+                        <input type="number" class="form-control" placeholder="Enter price">
+                      </div>
+                    </span>
+                  </div><br><br>
+                  <div class="col-sm-12">
+                    <div class="col-sm-6" style="margin-left:-14px">
+                      <button class="btn btn-default submit" (click)="placeOrder()" style="border:2px solid #337ab7;width:115%;color:#337ab7"><b>Place Order</b></button>
+                    </div>
+                    <div class="col-sm-6">
+                      <button class="btn btn-default reset" (click)="reset()" style="border:2px solid #337ab7;width:130%;color:#337ab7"><b>Reset</b></button>
+                    </div>
+                  </div>
+                  <br><br><br>
+                </div>
+                  </div>
+                  <div id="sell" class="tab-pane fade">
+                    <div class="row">
+                  <br>
+                  <div class="form-group sell_color">
+                    <span style="white-space: nowrap">
+                      <div class="col-md-4">
+                        <label>Quantity</label>
+                      </div>
+                      <div class="col-md-8">
+                        <input type="number" class="form-control" id="sell_quantity" placeholder="Enter quantity">
+                      </div>
+                    </span>
+                  </div><br><br>
+                      <p id="balance_text_sell" style="margin-left:15px;margin-top:-15px;color:green;font-size:11px;display:none"><b><i>** Available balance in <span id="exchange_balance_sell"></span>:2</i></b> </p>
+                  <div class="form-group sell_color">
+                    <span style="white-space: nowrap">
+                      <div class="col-md-4">
+                        <label>OrderType</label>
+                      </div>
+                      <div class="col-md-8">
+                        <select class="form-control" id="sell_orderType">
+                          <option value="" disabled selected>Select Type</option>
+                          <option *ngFor="let type of types" value="{{type}}">{{type}}</option>
+                        </select>
+                      </div>
+                    </span>
+                  </div><br><br>
+                  <div class="form-group sell_color">
+                    <span style="white-space: nowrap">
+                      <div class="col-md-4">
+                        <label>Price</label>
+                      </div>
+                      <div class="col-md-8">
+                        <input type="number" class="form-control" id="sell_price" placeholder="Enter price">
+                      </div>
+                    </span>
+                  </div><br><br>
+                  <div class="form-group sell_color">
+                    <span style="white-space: nowrap">
+                      <div class="col-md-4">
+                        <label>Destination</label>
+                      </div>
+                      <div class="col-md-8">
+                        <select class="form-control" id="sell_exchange" (change)="Sell_destination($event)">
+                          <option value="" disabled selected>Select destination</option>
+                          <option *ngFor="let exchange of exchanges" [selected]="exchange == 'BEST'" value="{{exchange}}">{{exchange}}</option>
+                        </select>
+                        <span class="glyphicon glyphicon-info-sign" style="top:-25px;margin-left:172px;font-size:13px;cursor:pointer;color:black" data-toggle="modal" data-target="#SellModal"></span>
+                      </div>
+                    </span>
+                  </div><br><br>
+                      <p style="font-size:11px;margin-left:15px;color:black" id="sell_exchange_text"><b><i>**BEST - Will route to best possible venue based on current market conditions</i></b></p>
+                  <div class="modal fade" id="SellModal" role="dialog">
+                    <div class="modal-dialog" style="margin-left:13%;margin-top:26%;width:475px">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title" style="text-align:center"><b>BEST</b></h4>
+                        </div>
+                        <div class="modal-body">
+                          <p>Will route to best possible venue based on current market conditions</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group sell_color">
+                    <span style="white-space: nowrap">
+                      <div class="col-md-4">
+                        <label>Expiry</label>
+                      </div>
+                      <div class="col-md-8">
+                        <select class="form-control">
+                          <option value="" disabled selected>Select Type</option>
+                          <option *ngFor="let type of expiry" value="{{type}}">{{type}}</option>
+                        </select>
+                      </div>
+                    </span>
+                  </div><br><br>
+                  <div class="form-group sell_color">
+                    <span style="white-space: nowrap">
+                      <div class="col-md-4">
+                        <label>Stop-Limit</label>
+                      </div>
+                      <div class="col-md-8">
+                        <input type="number" class="form-control" placeholder="Enter price">
+                      </div>
+                    </span>
+                  </div><br><br>
+                  <div class="col-sm-12">
+                    <div class="col-sm-6" style="margin-left:-14px">
+                      <button class="btn btn-default submit"  style="border:2px solid #337ab7;width:115%;color:#337ab7"><b>Place Order</b></button>
+                    </div>
+                    <div class="col-sm-6">
+                      <button class="btn btn-default reset" style="border:2px solid #337ab7;width:130%;color:#337ab7"><b>Reset</b></button>
+                    </div>
+                  </div>
+                  <br><br><br>
+                </div>
+                  </div>
+                  <div id="menu2" class="tab-pane fade">
+                    <h3>Menu 2</h3>
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                  </div>
+                  <div id="menu3" class="tab-pane fade">
+                    <h3>Menu 3</h3>
+                    <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <div>
+          <img src="assets/chart_with_indicators.png" style="width:103%;height:666px;border:2px solid #337ab7;border-radius:4px;margin-left:-6px" id="graph">
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="panel panel-primary" style="border:2px solid #337ab7;margin-right:-13px">
+            <div class="panel-heading" style="text-align:center"><b id="market_type">Universal Bid / Ask (BTC)<span id="uni_cur"></span></b></div>
+              <div class="panel-body" style="margin-bottom:-22px">
+                <div class="col-md-2">
+                <img src="assets/bid" style="width:104px;height:521px;border:1px solid gray;margin-left:-18px">
+              </div>
+              <div class="col-md-10">
+                <table class="table table-bordered bid_table" style="width:98%;margin-left:25px;border-left:1px solid gray">
+                  <thead style="background-color:#555;color:white">
+                    <tr>
+                      <th class="uni_col" style="width:27%">Price($)</th>
+                      <th class="uni_col">Size</th>
+                      <th class="uni_col">Total</th>
+                      <th class="exchange_col">Exchange</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr (click)="ask_row_1()" style="cursor:pointer;color:brown" id="ask_row_1">
+                      <td>6471.6</td>
+                      <td>435</td>
+                      <td>10590052</td>
+                      <td class="exchange_col">OKEX</td>
+                    </tr>
+                    <tr (click)="ask_row_2()" style="cursor:pointer;color:brown" id="ask_row_2">
+                      <td>6469.3</td>
+                      <td>350</td>
+                      <td>7774950</td>
+                      <td class="exchange_col">LIQUI</td>
+                    </tr>
+                    <tr (click)="ask_row_3()" style="cursor:pointer;color:brown" id="ask_row_3">
+                      <td>6468.74</td>
+                      <td>142</td>
+                      <td>5510695</td>
+                      <td class="exchange_col">COINEX</td>
+                    </tr>
+                    <tr (click)="ask_row_4()" style="cursor:pointer;color:brown" id="ask_row_4">
+                      <td>6468.1</td>
+                      <td>540</td>
+                      <td>4592134</td>
+                      <td class="exchange_col">HITBTC</td>
+                    </tr>
+                    <tr (click)="ask_row_5()" style="cursor:pointer;color:brown" id="ask_row_5">
+                      <td>6467.6</td>
+                      <td>50</td>
+                      <td>1099360</td>
+                      <td class="exchange_col">BITFINEX</td>
+                    </tr>
+                    <tr (click)="ask_row_6()" style="cursor:pointer;color:brown" id="ask_row_6">
+                      <td>6466.5</td>
+                      <td>120</td>
+                      <td>775980</td>
+                      <td class="exchange_col">HUOBI</td>
+                    </tr>
+                    <tr style="cursor:pointer" id="bid_row_" style="color:white">
+                      <td>6459.3</td>
+                      <td>4250</td>
+                      <td>EXMO</td>
+                      <td class="exchange_col">BINANCE</td>
+                    </tr>
+                    <tr (click)="bid_row_1()" style="cursor:pointer;color:green" id="bid_row_1">
+                      <td>6465.4</td>
+                      <td>100</td>
+                      <td>646540</td>
+                      <td class="exchange_col">BINANCE</td>
+                    </tr>
+                    <tr (click)="bid_row_2()" style="cursor:pointer;color:green" id="bid_row_2">
+                      <td>6464.3</td>
+                      <td>230</td>
+                      <td>2133329</td>
+                      <td class="exchange_col">HUOBI</td>
+                    </tr>
+                    <tr (click)="bid_row_3()" style="cursor:pointer;color:green" id="bid_row_3">
+                      <td>6462.5</td>
+                      <td>340</td>
+                      <td>4330529</td>
+                      <td class="exchange_col">KRAKEN</td>
+                    </tr>
+                    <tr (click)="bid_row_4()" style="cursor:pointer;color:green" id="bid_row_4">
+                      <td>6461.33</td>
+                      <td>500</td>
+                      <td>7561244</td>
+                      <td class="exchange_col">POLONIEX</td>
+                    </tr>
+                    <tr (click)="bid_row_5()" style="cursor:pointer;color:green" id="bid_row_5">
+                      <td>6460.25</td>
+                      <td>250</td>
+                      <td>9176306</td>
+                      <td class="exchange_col">YOBIT</td>
+                    </tr>
+                    <tr (click)="bid_row_6()" style="cursor:pointer;color:green" id="bid_row_6">
+                      <td>6459.33</td>
+                      <td>425</td>
+                      <td>11921521</td>
+                      <td class="exchange_col">RIGHTBTC</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              </div>
+            </div>
+        </div>
+      </div>
+  </div>
+  <div class="row">
+  <div class="col-md-9" style="margin-top:-14px;width:76%">
+     <ul class="nav nav-tabs order_detail">
+       <li class="active"><a data-toggle="tab" href="#one" style="border-top-right-radius:18px"><b>Open Orders</b></a></li>
+       <li><a data-toggle="tab" href="#two" style="border-top-right-radius:18px"><b>Completed Orders</b></a></li>
+     </ul>
+    <button class="btn btn-default" style="float:right;margin-top:-41px;border:2px solid #337ab7;width:13%;color:#337ab7" (click)="suspend_order()"><b>Export Selected Rows</b></button>
+    <button class="btn btn-default" style="float:right;margin-right:14%;margin-top:-41px;border:2px solid #337ab7;width:11%;color:#337ab7" (click)="suspend_order()"><b>Suspend Order(s)</b></button>
+    <button class="btn btn-default" style="margin-left:64%;margin-top:-69px;border:2px solid #337ab7;width:10%;color:#337ab7" (click)="cancel_order()"><b>Cancel Order(s)</b></button>
+    <button class="btn btn-default" style="margin-left:53%;margin-top:-108px;border:2px solid #337ab7;width:10%;color:#337ab7" (click)="fill_details()"><b>Fill Details</b></button>
+    <div class="tab-content">
+      <div id="one" class="tab-pane fade in active">
+        <div class="table-responsive" style="margin-top:-40px">
+          <table class="table table-bordered open_orders" style="margin-top:1px;border:2px solid #337ab7;border-radius:4px;border-top-left-radius:0px;border-top-right-radius:0px">
+            <thead>
+              <tr>
+                  <th style="text-align:center"><label class="container"><input (click)="select_all()" id="sel_all" type="checkbox" class="select_order"><span style="margin-top:-8px;background-color:white" class="checkmark"></span></label></th>
+                  <th>Ordered Time</th>
+                  <th>Asset</th>
+                  <th>Side</th>
+                  <th>Qty</th>
+                  <th>Price</th>
+                  <th>Completed Qty</th>
+                  <th>Avg.Px</th>
+                  <th style="width:40%">Remaining Qty</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><label class="container"><input type="checkbox" class="open_select"><span class="checkmark"></span></label></td>
+                <td>09:30:35</td>
+                <td>BTC</td>
+                <td>Buy</td>
+                <td>10</td>
+                <td>6467.6</td>
+                <td>2.5</td>
+                <td>6467.56</td>
+                <td style="width:40%">7.5</td>
+              </tr>
+              <tr>
+                <td><label class="container"><input type="checkbox" class="open_select"><span class="checkmark"></span></label></td>
+                <td>10:10:20</td>
+                <td>LTC</td>
+                <td>Sell</td>
+                <td>250</td>
+                <td>50.53</td>
+                <td>50</td>
+                <td>50.53</td>
+                <td style="width:40%">200</td>
+              </tr>
+              <tr>
+                <td><label class="container"><input type="checkbox" class="open_select"><span class="checkmark"></span></label></td>
+                <td>11:30:55</td>
+                <td>XRP</td>
+                <td>Buy</td>
+                <td>15000</td>
+                <td>0.5335</td>
+                <td>2555</td>
+                <td>0.5334</td>
+                <td style="width:40%">12455</td>
+              </tr>
+              <tr>
+                <td><label class="container"><input type="checkbox" class="open_select"><span class="checkmark"></span></label></td>
+                <td>12:30:35</td>
+                <td>BCH</td>
+                <td>Sell</td>
+                <td>110</td>
+                <td>1208.6</td>
+                <td>91.5</td>
+                <td>4332.56</td>
+                <td style="width:40%">17.5</td>
+              </tr>
+              <tr>
+                <td><label class="container"><input type="checkbox" class="open_select"><span class="checkmark"></span></label></td>
+                <td>03:10:15</td>
+                <td>ETH</td>
+                <td>Sell</td>
+                <td>23</td>
+                <td>1267.6</td>
+                <td>8.5</td>
+                <td>677.56</td>
+                <td style="width:40%">47.5</td>
+              </tr>
+              <tr>
+                <td><label class="container"><input type="checkbox" class="open_select"><span class="checkmark"></span></label></td>
+                <td>01:10:15</td>
+                <td>LTC</td>
+                <td>Buy</td>
+                <td>80</td>
+                <td>6367.2</td>
+                <td>6.5</td>
+                <td>5467.56</td>
+                <td style="width:40%">9.5</td>
+              </tr>
+              <tr>
+                <td><label class="container"><input type="checkbox" class="open_select"><span class="checkmark"></span></label></td>
+                <td>11:30:35</td>
+                <td>BTC</td>
+                <td>Buy</td>
+                <td>80</td>
+                <td>1467.6</td>
+                <td>21.5</td>
+                <td>2467.56</td>
+                <td style="width:40%">1.5</td>
+              </tr>
+              <tr>
+                <td><label class="container"><input type="checkbox" class="open_select"><span class="checkmark"></span></label></td>
+                <td>12:30:35</td>
+                <td>BCH</td>
+                <td>Sell</td>
+                <td>110</td>
+                <td>1208.6</td>
+                <td>91.5</td>
+                <td>4332.56</td>
+                <td style="width:40%">17.5</td>
+              </tr>
+              <tr>
+                <td><label class="container"><input type="checkbox" class="open_select"><span class="checkmark"></span></label></td>
+                <td>03:10:15</td>
+                <td>ETH</td>
+                <td>Sell</td>
+                <td>23</td>
+                <td>1267.6</td>
+                <td>8.5</td>
+                <td>677.56</td>
+                <td style="width:40%">47.5</td>
+              </tr>
+              <tr>
+                <td><label class="container"><input type="checkbox" class="open_select"><span class="checkmark"></span></label></td>
+                <td>01:10:15</td>
+                <td>LTC</td>
+                <td>Buy</td>
+                <td>80</td>
+                <td>6367.2</td>
+                <td>6.5</td>
+                <td>5467.56</td>
+                <td style="width:40%">9.5</td>
+              </tr>
+              <tr>
+                <td><label class="container"><input type="checkbox" class="open_select"><span class="checkmark"></span></label></td>
+                <td>11:30:35</td>
+                <td>BTC</td>
+                <td>Buy</td>
+                <td>80</td>
+                <td>1467.6</td>
+                <td>21.5</td>
+                <td>2467.56</td>
+                <td style="width:40%">1.5</td>
+              </tr>
+            </tbody>
+          </table>
+        </div><br>
+      </div>
+      <div id="two" class="tab-pane fade">
+          <div class="table-responsive" style="margin-top:-40px">
+          <table class="table table-bordered open_orders" style="margin-top:1px;border:2px solid #337ab7;border-radius:4px;border-top-left-radius:0px;border-top-right-radius:0px">
+            <thead>
+              <tr>
+                  <th style="text-align:center"><label class="container"><input (click)="select_all_complete()" type="checkbox" id="sel_all_com"><span style="margin-top:-8px;background-color:white" class="checkmark"></span></label></th>
+                  <th>Ordered Time</th>
+                  <th>Asset</th>
+                  <th>Side</th>
+                  <th>Qty</th>
+                  <th>Price</th>
+                  <th>Completed Qty</th>
+                  <th>Avg.Px</th>
+                  <th style="width:40%">Remaining Qty</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><label class="container"><input type="checkbox" class="com_select"><span class="checkmark"></span></label></td>
+                <td>09:30:35</td>
+                <td>BTC</td>
+                <td>Buy</td>
+                <td>10</td>
+                <td>6467.6</td>
+                <td>2.5</td>
+                <td>6467.56</td>
+                <td style="width:40%">7.5</td>
+              </tr>
+              <tr>
+                <td><label class="container"><input type="checkbox" class="com_select"><span class="checkmark"></span></label></td>
+                <td>10:10:20</td>
+                <td>LTC</td>
+                <td>Sell</td>
+                <td>250</td>
+                <td>50.53</td>
+                <td>50</td>
+                <td>50.53</td>
+                <td style="width:40%">200</td>
+              </tr>
+              <tr>
+                <td><label class="container"><input type="checkbox" class="com_select"><span class="checkmark"></span></label></td>
+                <td>11:30:55</td>
+                <td>XRP</td>
+                <td>Buy</td>
+                <td>15000</td>
+                <td>0.5335</td>
+                <td>2555</td>
+                <td>0.5334</td>
+                <td style="width:40%">12455</td>
+              </tr>
+              <tr>
+                <td><label class="container"><input type="checkbox" class="com_select"><span class="checkmark"></span></label></td>
+                <td>12:30:35</td>
+                <td>BCH</td>
+                <td>Sell</td>
+                <td>110</td>
+                <td>1208.6</td>
+                <td>91.5</td>
+                <td>4332.56</td>
+                <td style="width:40%">17.5</td>
+              </tr>
+              <tr>
+                <td><label class="container"><input type="checkbox" class="com_select"><span class="checkmark"></span></label></td>
+                <td>03:10:15</td>
+                <td>ETH</td>
+                <td>Sell</td>
+                <td>23</td>
+                <td>1267.6</td>
+                <td>8.5</td>
+                <td>677.56</td>
+                <td style="width:40%">47.5</td>
+              </tr>
+              <tr>
+                <td><label class="container"><input type="checkbox" class="com_select"><span class="checkmark"></span></label></td>
+                <td>01:10:15</td>
+                <td>LTC</td>
+                <td>Buy</td>
+                <td>80</td>
+                <td>6367.2</td>
+                <td>6.5</td>
+                <td>5467.56</td>
+                <td style="width:40%">9.5</td>
+              </tr>
+              <tr>
+                <td><label class="container"><input type="checkbox" class="com_select"><span class="checkmark"></span></label></td>
+                <td>11:30:35</td>
+                <td>BTC</td>
+                <td>Buy</td>
+                <td>80</td>
+                <td>1467.6</td>
+                <td>21.5</td>
+                <td>2467.56</td>
+                <td style="width:40%">1.5</td>
+              </tr>
+              <tr>
+                <td><label class="container"><input type="checkbox" class="com_select"><span class="checkmark"></span></label></td>
+                <td>12:30:35</td>
+                <td>BCH</td>
+                <td>Sell</td>
+                <td>110</td>
+                <td>1208.6</td>
+                <td>91.5</td>
+                <td>4332.56</td>
+                <td style="width:40%">17.5</td>
+              </tr>
+              <tr>
+                <td><label class="container"><input type="checkbox" class="com_select"><span class="checkmark"></span></label></td>
+                <td>03:10:15</td>
+                <td>ETH</td>
+                <td>Sell</td>
+                <td>23</td>
+                <td>1267.6</td>
+                <td>8.5</td>
+                <td>677.56</td>
+                <td style="width:40%">47.5</td>
+              </tr>
+              <tr>
+                <td><label class="container"><input type="checkbox" class="com_select"><span class="checkmark"></span></label></td>
+                <td>01:10:15</td>
+                <td>LTC</td>
+                <td>Buy</td>
+                <td>80</td>
+                <td>6367.2</td>
+                <td>6.5</td>
+                <td>5467.56</td>
+                <td style="width:40%">9.5</td>
+              </tr>
+              <tr>
+                <td><label class="container"><input type="checkbox" class="com_select"><span class="checkmark"></span></label></td>
+                <td>11:30:35</td>
+                <td>BTC</td>
+                <td>Buy</td>
+                <td>80</td>
+                <td>1467.6</td>
+                <td>21.5</td>
+                <td>2467.56</td>
+                <td style="width:40%">1.5</td>
+              </tr>
+            </tbody>
+          </table>
+        </div><br>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3" style="margin-left:75%;margin-top:-270px">
+    <div id="news_feed_size" style="margin-top:-80px;height:309px;border:2px solid #337ab7;border-radius:4px;margin-left:-7px">
+      <a href="https://cryptopanic.com/" target="_blank" data-news_feed="recent" data-bg_color="#FFFFFF" data-text_color="#333333" data-link_color="#0091C2" data-header_bg_color="#337ab7" data-header_text_color="#FFFFFF" data-posts_limit="3" class="CryptoPanicWidget">Latest News</a>
+    </div>
+  </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
