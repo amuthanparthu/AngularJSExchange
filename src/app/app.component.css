@@ -1,0 +1,39 @@
+.navbar
+{
+  border-radius: 0px;
+}
+.navbar-inverse
+{
+  background-color: white;
+  border-color: white;
+}
+.table tbody tr.highlight td
+{
+  background-color: #ddd;
+}
+.table tbody tr.unhighlight td
+{
+  background-color: white;
+}
+.navbar-brand
+{
+  padding: 0px;
+}
+.navbar-brand>img
+{
+  height: 100%;
+  width: auto;
+}
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover
+{
+  color: #337ab7;
+  background-color: white;
+}
+.navbar-inverse .navbar-nav>li>a
+{
+  color: black;
+}
+.navbar-inverse .navbar-nav>li>a:hover
+{
+  color: black;
+}

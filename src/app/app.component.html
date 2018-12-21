@@ -1,0 +1,45 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="index.html">
+          <img src="assets/omnipoint.JPG" alt="Omnipoint" draggable="false">
+        </a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class=""><a href="index.html">Home</a></li>
+        <li class=""><a routerLink="trade" routerLinkActive="active">Trade</a></li>
+        <li class=""><a routerLink="account" routerLinkActive="active">Account</a></li>
+        <li class=""><a routerLink="portfolio" routerLinkActive="active">Portfolio</a></li>
+        <li class=""><a routerLink="setings" routerLinkActive="active">Settings</a></li>
+        <li class=""><a routerLink="admin_account" routerLinkActive="active">Admin Account</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item">
+            <a class="nav-link" href="#">Help</a>
+        </li>
+        <li class="nav-item">
+            <div class="dropdown" style="padding:14px">
+              <span style="color:black;cursor:pointer" class="nav-link" data-toggle="dropdown">Theme</span>
+              <ul class="dropdown-menu" style="left:12px">
+                <li><a href="#">Green</a></li>
+                <li><a href="#">Black</a></li>
+              </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i style="font-size:16px" class="glyphicon glyphicon-user" aria-hidden="true"></i></a>
+        </li>
+      </ul>
+    </div>
+</nav>
+<router-outlet></router-outlet>
