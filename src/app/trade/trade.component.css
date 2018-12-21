@@ -1,0 +1,275 @@
+
+.stylish-input-group .input-group-addon
+{
+    background: white !important;
+}
+.stylish-input-group .form-control
+{
+    border-right:0;
+    box-shadow:0 0 0;
+    border-color:#ccc;
+}
+.stylish-input-group button
+{
+    border:0;
+    background:transparent;
+}
+
+
+legend
+{
+    display: block;
+    width: 46%;
+    padding: 0;
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: inherit;
+    color: #333;
+    border: 0;
+    /* border-bottom: 1px solid #e5e5e5; */
+    margin-left: 20px;
+    text-align:center;
+}
+
+fieldset
+{
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 2px solid #337ab7;
+}
+
+table.bid_table
+{
+  border-collapse: collapse;
+  width: 300px;
+  display: block;
+}
+
+
+table.bid_table tbody
+{
+    height: 297px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+table.bid_table td,table.bid_table th
+{
+  border:1px solid gray;
+  border-left:none;
+}
+
+
+
+
+
+table.open_orders
+{
+  border-collapse: collapse;
+  width: 100%;
+  display: block;
+}
+table.open_orders thead
+{
+  background-color: #337ab7;
+  color:white;
+}
+table.open_orders thead, table.open_orders tbody
+{
+   display: block;
+}
+table.open_orders tbody
+{
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 149px;
+}
+table.open_orders td, table.open_orders th
+{
+  min-width: 149px;
+  height: 25px;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  max-width: 149px;
+  border:1px solid #337ab7;
+  border-left:none;
+}
+
+
+
+.order_detail>li.active>a, .order_detail>li.active>a:focus, .order_detail>li.active>a:hover
+{
+    color: white;
+    cursor: default;
+    background-color: #555;
+    border: 2px solid #337ab7;
+    border-bottom-color: transparent;
+}
+
+
+
+/* The container */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 55px;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border:1px solid gray;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color: none;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: none;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    left: 6px;
+    width: 7px;
+    height: 16px;
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+
+/*table.table-bordered{
+    border:1px solid black;
+    margin-top:20px;
+  }
+table.table-bordered > thead > tr > th{
+    border:1px solid black;
+}
+table.table-bordered > tbody > tr > td{
+    border:1px solid black;
+}*/
+
+
+
+.buy_color
+{
+  color:black;
+}
+.sell_color
+{
+  color:black;
+}
+
+#order_details_ul>li:nth-child(2)>a
+{
+  color:brown;
+}
+
+
+/* Navbar Dropdown */
+.dropbtn {
+    color: black;
+    padding: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+.btn-default:hover
+{
+  background-color:white;
+}
+
+
+.order_detail>li.active>a, .order_detail>li.active>a:focus, .order_detail>li.active>a:hover
+{
+    color: white;
+    cursor: default;
+    background-color: #337ab7;
+    border: 2px solid #337ab7;
+    border-bottom-color: transparent;
+}
+
+
+.order_detail>li>a, .order_detail>li>a:hover
+{
+    border: 2px solid #337ab7;
+    border-radius: 4px 4px 0 0;
+    background-color:white;
+    color:#337ab7;
+}
+
+#ui-id-1 {
+    background: red !important;
+}
+
+label
+{
+  margin-top:7px;
+}
